@@ -1,11 +1,12 @@
 {
   "workflows": {
     "Nightly": {
-      "version": "0.5.0",
+      "version": "0.9.0",
       "name": "Nightly",
       "name_slug": "nightly",
       "job_timeout": 10,
       "default_branch": "main",
+      "container_runtime": "podman",
       "workflow_key": "nightly",
       "workflow_config": {
         "type": "nightly",
@@ -30,6 +31,7 @@
             "scope": "module",
             "action": "builtin://actions/uv-build",
             "module": "python-pyproject-toml",
+            "module-dir": ".",
             "access": {
               "executables": [
                 {
@@ -76,6 +78,7 @@
             "scope": "module",
             "action": "builtin://actions/uv-test",
             "module": "python-pyproject-toml",
+            "module-dir": ".",
             "access": {
               "executables": [
                 {
@@ -139,8 +142,7 @@
                   "constraint": "\u003e= 0.0.0-0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -210,8 +212,7 @@
                   "constraint": "\u003e= 0.0.0-0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -273,8 +274,7 @@
                   "constraint": "=\u003e 0.61.0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -325,16 +325,17 @@
         ]
       },
       "workflow_dependency": {
-        "cid": {
-          "id": "cid",
-          "type": "binary",
-          "version": "0.5.0"
+        "pkg:docker/podman/stable?repository_url=quay.io": {
+          "id": "podman/stable",
+          "type": "docker",
+          "version": "v5.8.1-immutable",
+          "hash": "42d8b3d789333f07e631305325a02b4ab33c3f107413e04b612973a72f1d7deb",
+          "repository": "quay.io"
         },
-        "quay.io/podman/stable": {
-          "id": "quay.io/podman/stable",
-          "type": "oci-container",
-          "version": "v5.4.2-immutable",
-          "hash": "642704dd0bcd909b722a06e0dbe199bc74163047886c3d5c869fe2c0d8e3d4d5"
+        "pkg:github/cidverse/cid": {
+          "id": "cidverse/cid",
+          "type": "github",
+          "version": "0.9.0"
         }
       },
       "ignore_files": [
@@ -344,15 +345,17 @@
         ".gitattributes",
         ".editorconfig",
         "renovate.json",
-        "CODEOWNERS"
+        "CODEOWNERS",
+        "SECURITY.md"
       ]
     },
     "Pull Request": {
-      "version": "0.5.0",
+      "version": "0.9.0",
       "name": "Pull Request",
       "name_slug": "pull-request",
       "job_timeout": 10,
       "default_branch": "main",
+      "container_runtime": "podman",
       "workflow_key": "pull-request",
       "workflow_config": {
         "type": "pull-request",
@@ -375,6 +378,7 @@
             "scope": "module",
             "action": "builtin://actions/uv-build",
             "module": "python-pyproject-toml",
+            "module-dir": ".",
             "access": {
               "executables": [
                 {
@@ -421,6 +425,7 @@
             "scope": "module",
             "action": "builtin://actions/uv-test",
             "module": "python-pyproject-toml",
+            "module-dir": ".",
             "access": {
               "executables": [
                 {
@@ -484,8 +489,7 @@
                   "constraint": "\u003e= 0.0.0-0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -555,8 +559,7 @@
                   "constraint": "\u003e= 0.0.0-0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -618,8 +621,7 @@
                   "constraint": "=\u003e 0.61.0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -670,16 +672,17 @@
         ]
       },
       "workflow_dependency": {
-        "cid": {
-          "id": "cid",
-          "type": "binary",
-          "version": "0.5.0"
+        "pkg:docker/podman/stable?repository_url=quay.io": {
+          "id": "podman/stable",
+          "type": "docker",
+          "version": "v5.8.1-immutable",
+          "hash": "42d8b3d789333f07e631305325a02b4ab33c3f107413e04b612973a72f1d7deb",
+          "repository": "quay.io"
         },
-        "quay.io/podman/stable": {
-          "id": "quay.io/podman/stable",
-          "type": "oci-container",
-          "version": "v5.4.2-immutable",
-          "hash": "642704dd0bcd909b722a06e0dbe199bc74163047886c3d5c869fe2c0d8e3d4d5"
+        "pkg:github/cidverse/cid": {
+          "id": "cidverse/cid",
+          "type": "github",
+          "version": "0.9.0"
         }
       },
       "ignore_files": [
@@ -689,15 +692,17 @@
         ".gitattributes",
         ".editorconfig",
         "renovate.json",
-        "CODEOWNERS"
+        "CODEOWNERS",
+        "SECURITY.md"
       ]
     },
     "Release": {
-      "version": "0.5.0",
+      "version": "0.9.0",
       "name": "Release",
       "name_slug": "release",
       "job_timeout": 10,
       "default_branch": "main",
+      "container_runtime": "podman",
       "workflow_key": "release",
       "workflow_config": {
         "type": "release",
@@ -725,6 +730,7 @@
             "scope": "module",
             "action": "builtin://actions/uv-build",
             "module": "python-pyproject-toml",
+            "module-dir": ".",
             "access": {
               "executables": [
                 {
@@ -771,6 +777,7 @@
             "scope": "module",
             "action": "builtin://actions/uv-test",
             "module": "python-pyproject-toml",
+            "module-dir": ".",
             "access": {
               "executables": [
                 {
@@ -834,8 +841,7 @@
                   "constraint": "\u003e= 0.0.0-0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -905,8 +911,7 @@
                   "constraint": "\u003e= 0.0.0-0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -968,8 +973,7 @@
                   "constraint": "=\u003e 0.61.0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -1023,7 +1027,7 @@
             "slug": "changelog-generate",
             "stage": "publish",
             "scope": "project",
-            "action": "container://ghcr.io/cidverse/cid-actions-go:0.1.0+changelog-generate",
+            "action": "builtin://actions/changelog-generate",
             "run-after": [
               "gitleaks-scan",
               "semgrep-scan",
@@ -1082,7 +1086,7 @@
             "slug": "gitlab-release-publish",
             "stage": "publish",
             "scope": "project",
-            "action": "container://ghcr.io/cidverse/cid-actions-go:0.1.0+gitlab-release-publish",
+            "action": "builtin://actions/gitlab-release-publish",
             "run-after": [
               "changelog-generate",
               "gitleaks-scan",
@@ -1164,16 +1168,17 @@
         ]
       },
       "workflow_dependency": {
-        "cid": {
-          "id": "cid",
-          "type": "binary",
-          "version": "0.5.0"
+        "pkg:docker/podman/stable?repository_url=quay.io": {
+          "id": "podman/stable",
+          "type": "docker",
+          "version": "v5.8.1-immutable",
+          "hash": "42d8b3d789333f07e631305325a02b4ab33c3f107413e04b612973a72f1d7deb",
+          "repository": "quay.io"
         },
-        "quay.io/podman/stable": {
-          "id": "quay.io/podman/stable",
-          "type": "oci-container",
-          "version": "v5.4.2-immutable",
-          "hash": "642704dd0bcd909b722a06e0dbe199bc74163047886c3d5c869fe2c0d8e3d4d5"
+        "pkg:github/cidverse/cid": {
+          "id": "cidverse/cid",
+          "type": "github",
+          "version": "0.9.0"
         }
       },
       "ignore_files": [
@@ -1183,15 +1188,17 @@
         ".gitattributes",
         ".editorconfig",
         "renovate.json",
-        "CODEOWNERS"
+        "CODEOWNERS",
+        "SECURITY.md"
       ]
     },
     "Main": {
-      "version": "0.5.0",
+      "version": "0.9.0",
       "name": "Main",
       "name_slug": "main",
       "job_timeout": 10,
       "default_branch": "main",
+      "container_runtime": "podman",
       "workflow_key": "main",
       "workflow_config": {
         "type": "main",
@@ -1217,6 +1224,7 @@
             "scope": "module",
             "action": "builtin://actions/uv-build",
             "module": "python-pyproject-toml",
+            "module-dir": ".",
             "access": {
               "executables": [
                 {
@@ -1263,6 +1271,7 @@
             "scope": "module",
             "action": "builtin://actions/uv-test",
             "module": "python-pyproject-toml",
+            "module-dir": ".",
             "access": {
               "executables": [
                 {
@@ -1326,8 +1335,7 @@
                   "constraint": "\u003e= 0.0.0-0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -1397,8 +1405,7 @@
                   "constraint": "\u003e= 0.0.0-0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -1460,8 +1467,7 @@
                   "constraint": "=\u003e 0.61.0"
                 },
                 {
-                  "name": "gitlab-sarif-converter",
-                  "constraint": "\u003e= 0.0.0-0"
+                  "name": "gitlab-sarif-converter"
                 }
               ],
               "network": [
@@ -1512,16 +1518,17 @@
         ]
       },
       "workflow_dependency": {
-        "cid": {
-          "id": "cid",
-          "type": "binary",
-          "version": "0.5.0"
+        "pkg:docker/podman/stable?repository_url=quay.io": {
+          "id": "podman/stable",
+          "type": "docker",
+          "version": "v5.8.1-immutable",
+          "hash": "42d8b3d789333f07e631305325a02b4ab33c3f107413e04b612973a72f1d7deb",
+          "repository": "quay.io"
         },
-        "quay.io/podman/stable": {
-          "id": "quay.io/podman/stable",
-          "type": "oci-container",
-          "version": "v5.4.2-immutable",
-          "hash": "642704dd0bcd909b722a06e0dbe199bc74163047886c3d5c869fe2c0d8e3d4d5"
+        "pkg:github/cidverse/cid": {
+          "id": "cidverse/cid",
+          "type": "github",
+          "version": "0.9.0"
         }
       },
       "ignore_files": [
@@ -1531,7 +1538,8 @@
         ".gitattributes",
         ".editorconfig",
         "renovate.json",
-        "CODEOWNERS"
+        "CODEOWNERS",
+        "SECURITY.md"
       ]
     }
   }
